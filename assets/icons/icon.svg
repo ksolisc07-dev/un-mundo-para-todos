@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#8fd3ff"/><path d="M0 380 Q130 330 256 370 T512 360 V512 H0Z" fill="#6cc24a"/><circle cx="420" cy="92" r="46" fill="#ffd23f"/><g transform="translate(46 70) scale(3.5)"><g class="mascot-wing mascot-wing--back"><path d="M74 52 Q92 18 112 20 Q104 44 80 60 Z" fill="#7fd6a8" stroke="#2d2a32" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></g>
+     <path d="M84 74 L108 92 L100 96 L104 104 L82 86 Z" fill="#1c8f5a" stroke="#2d2a32" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+     <ellipse cx="74" cy="66" rx="22" ry="17" fill="#2fbf71" stroke="#2d2a32" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" transform="rotate(25 74 66)"/>
+     <ellipse cx="68" cy="72" rx="12" ry="9" fill="#d8f5e3" transform="rotate(25 68 72)"/>
+     <path d="M46 48 L6 54 L46 53 Z" fill="#3b3346" stroke="#2d2a32" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+     <circle cx="58" cy="46" r="15" fill="#2fbf71" stroke="#2d2a32" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+     <path d="M50 56 q6 8 16 4 q-4 -6 -16 -4 Z" fill="#e63980"/>
+     <path d="M53 42 q4 -5 8 0" fill="none" stroke="#2d2a32" stroke-width="3" stroke-linecap="round"/><path d="M48 54 q5 5 10 1" fill="none" stroke="#2d2a32" stroke-width="2.4" stroke-linecap="round"/>
+     <circle cx="66" cy="52" r="3" fill="#ff9fc3" opacity=".8"/>
+     <g class="mascot-wing mascot-wing--front"><path d="M70 58 Q80 22 104 26 Q98 52 76 66 Z" fill="#a7e8c4" stroke="#2d2a32" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></g></g></svg>
