@@ -1250,6 +1250,10 @@ summary {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     max-width: 760px;
   }
+  .memory-grid--10 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    max-width: 860px;
+  }
 }
 
 .memory-card {
@@ -1786,4 +1790,169 @@ html.reduce-motion *::after {
   body {
     background: #fff;
   }
+}
+
+/* ==========================================================================
+   Mundos de letras y emociones
+   ========================================================================== */
+.letter {
+  font-weight: 900;
+  font-size: clamp(2.8rem, 12vw, 4.4rem);
+  line-height: 1;
+}
+
+.prompt-number .letter {
+  font-size: clamp(4rem, 18vw, 6.5rem);
+}
+
+.word {
+  font-weight: 900;
+  font-size: clamp(1.4rem, 6vw, 2.2rem);
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+}
+
+.options--word .option {
+  aspect-ratio: auto;
+  min-height: 96px;
+}
+
+.option-text {
+  font-weight: 800;
+  font-size: clamp(0.85rem, 3.2vw, 1.05rem);
+  line-height: 1.15;
+  margin-top: 4px;
+}
+
+.options--action .option {
+  aspect-ratio: auto;
+  min-height: 130px;
+}
+
+.options--action .option-art > .art {
+  height: auto;
+  max-height: 120px;
+}
+
+/* Forma la palabra */
+.word-slots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.slot {
+  width: clamp(38px, 11vw, 56px);
+  height: clamp(48px, 13vw, 66px);
+  display: grid;
+  place-items: center;
+  font-size: clamp(1.8rem, 8vw, 2.6rem);
+  font-weight: 900;
+  background: var(--paper);
+  border: 3px dashed var(--ink-soft);
+  border-radius: 12px;
+}
+
+.slot--filled {
+  border-style: solid;
+  border-color: var(--success);
+  background: #e4f7e9;
+}
+
+.slot--next {
+  border-color: var(--primary);
+  border-width: 4px;
+}
+
+.word-slots.is-complete .slot {
+  animation: bounce 0.6s ease;
+}
+
+.options--tiles {
+  /* Tamaño fijo por ficha: así caben 5 por fila en un teléfono. */
+  grid-template-columns: repeat(auto-fit, clamp(58px, 17vw, 96px));
+  justify-content: center;
+}
+
+.tile {
+  aspect-ratio: 1;
+  min-height: 58px;
+}
+
+.tile .letter {
+  font-size: clamp(2rem, 9vw, 2.8rem);
+}
+
+.tile.is-used {
+  opacity: 0.25;
+  box-shadow: none;
+  border-style: dashed;
+}
+
+.tile.is-shaking {
+  animation: wiggle 0.4s ease;
+}
+
+.tile.is-hint {
+  box-shadow: 0 0 0 6px var(--sun), 0 7px 0 rgba(45, 42, 50, 0.25);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.tile.is-hint .option-mark {
+  background: var(--sun);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+}
+
+/* Práctica frente a la cámara */
+.lsec-player--practice {
+  max-width: 760px;
+}
+
+.lsec-media {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.lsec-player--practice .lsec-media {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.camera-practice {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.camera-view {
+  display: none;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+}
+
+.camera-practice.is-on .camera-view {
+  display: block;
+}
+
+.camera-video {
+  width: 100%;
+  display: block;
+  transform: scaleX(-1); /* como un espejo */
+}
+
+.camera-status:empty {
+  display: none;
+}
+
+.camera-status,
+.camera-privacy {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.camera-privacy {
+  color: var(--ink-soft);
 }

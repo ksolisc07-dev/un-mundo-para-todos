@@ -18,9 +18,9 @@ sin recopilar datos de niñas y niños.
 | 🦁 Los animales | **Jugable** | ¿Quién es? · ¿Quién hace así? · ¿De quién es la sombra? · ¿Quién tiene…? · Memoria |
 | 🎨 Colores y formas | **Jugable** | Toca el color · ¿De qué color es? · Encuentra la figura · Ordena en cajas · ¿Qué sigue? |
 | 🔢 Los números | **Jugable** | Cuenta · Número y cantidad · Encuentra el número · ¿Dónde hay más? · Juntamos |
-| 🔤 Las letras | Próximamente | Pantalla informativa con las actividades planificadas |
-| 😊 Las emociones | Próximamente | Pantalla informativa con las actividades planificadas |
-| 🤟 Manitos que hablan (LSEC) | En preparación | Estado del vocabulario LSEC; **no muestra señas** hasta tener videos auténticos validados |
+| 🔤 Las letras | **Jugable** | Las vocales · ¿Con qué letra empieza? · Empieza igual (sonido inicial) · Forma la palabra · ¿Qué dice? |
+| 😊 Las emociones | **Jugable** | Caras iguales · ¿Cómo se siente? · ¿Qué siente? (situaciones) · ¿Qué puedes hacer? (empatía) · Memoria de emociones |
+| 🤟 Manitos que hablan (LSEC) | En preparación | Estado del vocabulario LSEC; **no muestra señas** hasta tener videos auténticos validados. Práctica con cámara ya programada |
 
 Cada actividad jugable tiene **3 niveles** de dificultad progresiva, rondas configurables
 (3, 5 u 8), intentos ilimitados y ninguna penalización.
@@ -43,6 +43,10 @@ Cada actividad jugable tiene **3 niveles** de dificultad progresiva, rondas conf
   recomendaciones pedagógicas.
 - **Preparado para LSEC**: registro de videos con validación obligatoria y reproductor
   accesible (repetir, subtítulos opcionales, créditos y licencia).
+- **Práctica de señas frente a la cámara (espejo)**: junto a cada video LSEC validado,
+  la niña o el niño puede verse en la cámara para imitar la seña. La imagen no se graba
+  ni se envía, la activa una persona adulta y **no califica la seña** automáticamente
+  (ver [docs/LSEC_VIDEOS.md](docs/LSEC_VIDEOS.md#reconocimiento-automático-de-señas)).
 - **Aplicación instalable (PWA)** y uso sin conexión después de la primera visita.
 - **Ilustraciones originales en SVG** (animales, mascota Tito el colibrí, objetos, figuras).
 
@@ -97,8 +101,8 @@ npm test                    # unitarias + navegador
 Si es la primera vez que usas Playwright: `npx playwright install chromium`.
 
 Las pruebas cubren: que cada ronda tenga una única respuesta correcta y opciones
-válidas (300 rondas por actividad y nivel), que las 15 actividades se puedan jugar
-hasta el final en escritorio y móvil, el guardado del progreso, el panel docente,
+válidas (300 rondas por actividad y nivel), que las 25 actividades se puedan jugar
+hasta el final en escritorio y móvil (las 25), el guardado del progreso, el panel docente,
 las preferencias, la navegación por teclado, el tamaño de los botones, la ausencia
 de desplazamiento horizontal, el modo sin conexión, las rutas bajo
 `/un-mundo-para-todos/` y la auditoría de accesibilidad con axe.
@@ -142,9 +146,12 @@ Más detalle en [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md).
 
 ## Funcionalidades pendientes
 
-- **Mundo 4 (Las letras)** y **Mundo 5 (Las emociones)**: diseñados, aún sin juegos.
 - **Mundo 6 (Manitos que hablan)**: requiere videos auténticos de LSEC con permisos y
-  validación de la comunidad sorda ecuatoriana. El sistema ya está listo para recibirlos.
+  validación de la comunidad sorda ecuatoriana. El sistema (reproductor y práctica con
+  cámara) ya está listo para recibirlos.
+- **Responder con señas y que el sistema las reconozca**: necesita un conjunto de
+  grabaciones LSEC auténticas con consentimiento y validación, y un modelo entrenado y
+  evaluado con la comunidad sorda. Hoy no existe; no se simula.
 - **Sonidos reales de animales**: hoy se usan onomatopeyas habladas y escritas. Se pueden
   añadir grabaciones con licencia libre (ver [docs/NUEVOS_JUEGOS.md](docs/NUEVOS_JUEGOS.md)).
 - **Locución grabada**: la voz depende de las voces en español instaladas en cada

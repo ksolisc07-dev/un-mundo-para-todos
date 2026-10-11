@@ -10,6 +10,11 @@ const SCREENS = [
   ['juego de contar', '#/juego/numeros/contar/2'],
   ['juego de comparar', '#/juego/numeros/comparar/3'],
   ['memoria', '#/juego/animales/memoria/1'],
+  ['vocales', '#/juego/letras/vocales/2'],
+  ['forma la palabra', '#/juego/letras/palabras/2'],
+  ['¿qué dice?', '#/juego/letras/leer/3'],
+  ['¿qué siente?', '#/juego/emociones/situaciones/3'],
+  ['¿qué puedes hacer?', '#/juego/emociones/acciones/3'],
   ['preferencias', '#/preferencias'],
   ['docentes (acceso)', '#/docentes'],
 ];

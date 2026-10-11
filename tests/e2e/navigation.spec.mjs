@@ -4,12 +4,12 @@ test('la pantalla principal muestra los 6 mundos', async ({ page }) => {
   await page.goto('./');
   await expect(page).toHaveTitle(/Un Mundo Para Todos/);
   await expect(page.locator('.world-card')).toHaveCount(6);
-  await expect(page.locator('.world-card--soon')).toHaveCount(3);
+  await expect(page.locator('.world-card--soon')).toHaveCount(1);
   await expect(page.getByRole('link', { name: /Los animales\. 0 de 15 estrellas/ })).toBeVisible();
 });
 
 test('los mundos en preparación lo dicen claramente y no tienen juegos falsos', async ({ page }) => {
-  for (const world of ['letras', 'emociones', 'senas']) {
+  for (const world of ['senas']) {
     await page.goto(`#/mundo/${world}`);
     await expect(page.locator('.bubble')).toContainText('Próximamente');
     await expect(page.getByRole('heading', { name: 'Este mundo está en preparación' })).toBeVisible();
@@ -62,6 +62,10 @@ test('sin desplazamiento horizontal en ninguna pantalla', async ({ page }) => {
     '#/juego/numeros/sumar/3',
     '#/juego/numeros/relacionar/3',
     '#/juego/numeros/comparar/3',
+    '#/juego/letras/palabras/3',
+    '#/juego/letras/leer/3',
+    '#/juego/emociones/acciones/3',
+    '#/juego/emociones/memoria/3',
     '#/mundo/senas',
     '#/preferencias',
     '#/docentes',

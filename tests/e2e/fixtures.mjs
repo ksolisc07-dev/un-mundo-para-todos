@@ -43,7 +43,19 @@ export const FAST = {
 export async function playToEnd(page) {
   const game = page.locator('.game');
   await expect(game).toBeVisible();
-  if (await game.evaluate((el) => el.classList.contains('game--memory'))) {
+  if (await game.evaluate((el) => el.classList.contains('game--spell'))) {
+    for (;;) {
+      if (await page.locator('.finish').isVisible()) break;
+      const word = await page.locator('.game').getAttribute('data-answer');
+      for (const letter of word) {
+        await page.locator(`.tile:not(.is-used)[data-letter="${letter}"]`).first().click();
+      }
+      await expect(page.locator('.word-slots')).toHaveClass(/is-complete/);
+      await page.waitForFunction(() => document.querySelector('.finish') || !document.querySelector('.word-slots.is-complete'), null, {
+        timeout: 12000,
+      });
+    }
+  } else if (await game.evaluate((el) => el.classList.contains('game--memory'))) {
     const keys = await page.locator('.memory-card').evaluateAll((cards) => cards.map((c) => c.dataset.key));
     for (const key of [...new Set(keys)]) {
       const pair = page.locator(`.memory-card[data-key="${key}"]`);

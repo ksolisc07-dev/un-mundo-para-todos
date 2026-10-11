@@ -4,8 +4,9 @@
  */
 import { el } from '../core/dom.js';
 import { icon } from '../art/icons.js';
+import { cameraPractice, cameraSupported } from './cameraPractice.js';
 
-export function lsecPlayer(entry) {
+export function lsecPlayer(entry, ctx = null) {
   const video = el('video', {
     class: 'lsec-video',
     src: entry.src,
@@ -39,10 +40,11 @@ export function lsecPlayer(entry) {
   ]
     .filter(Boolean)
     .join(' · ');
+  const practice = ctx?.store.prefs.lsecCamera && cameraSupported() ? cameraPractice(ctx, entry.label) : null;
   return el(
     'figure',
-    { class: 'lsec-player' },
-    video,
+    { class: `lsec-player ${practice ? 'lsec-player--practice' : ''}` },
+    el('div', { class: 'lsec-media' }, video, practice),
     el('figcaption', {}, el('strong', {}, `LSEC: ${entry.label}`), replay, el('small', {}, credit))
   );
 }

@@ -1,5 +1,6 @@
 /** Formulario de preferencias de accesibilidad, audio y efectos. */
 import { el } from '../core/dom.js';
+import { cameraSupported } from './cameraPractice.js';
 
 let uid = 0;
 
@@ -71,7 +72,8 @@ function radios(ctx, key, legend, choices) {
   );
 }
 
-export function prefsForm(ctx) {
+/** @param {{adult?: boolean}} options adult: muestra opciones que sólo decide una persona adulta (cámara). */
+export function prefsForm(ctx, { adult = false } = {}) {
   const speechNote = !ctx.speech.supported
     ? el('p', { class: 'notice' }, 'Este navegador no tiene síntesis de voz: las instrucciones se muestran escritas y con dibujos.')
     : !ctx.speech.hasSpanishVoice()
@@ -148,7 +150,20 @@ export function prefsForm(ctx) {
           ? 'Se muestran sólo videos auténticos validados por la comunidad sorda ecuatoriana.'
           : 'Todavía no hay videos LSEC validados. Esta opción se activará cuando se incorporen videos auténticos, con permiso de uso y validados por personas competentes en LSEC.',
         { disabled: !lsecAvailable }
-      )
+      ),
+      adult
+        ? toggle(
+            ctx,
+            'lsecCamera',
+            'Permitir practicar señas frente a la cámara',
+            !cameraSupported()
+              ? 'Este navegador no permite usar la cámara.'
+              : lsecAvailable
+                ? 'Junto a cada video LSEC aparece un botón para verse como en un espejo e imitar la seña. La imagen no se graba ni se envía. La plataforma no califica la seña: acompañe y revise usted.'
+                : 'Disponible cuando existan videos LSEC validados. La imagen de la cámara nunca se graba ni se envía, y la plataforma no califica las señas automáticamente.',
+            { disabled: !lsecAvailable || !cameraSupported() }
+          )
+        : null
     )
   );
 }

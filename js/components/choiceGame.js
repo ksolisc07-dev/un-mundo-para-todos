@@ -58,7 +58,7 @@ export function choiceGame(ctx, activity, { level, rounds, onProgress, onFinish 
     if (!ctx.store.prefs.lsec || !round.lsec) return;
     const entry = ctx.lsec.videoFor(round.lsec);
     const label = ctx.lsec.entries.find((e) => e.concept === round.lsec)?.label;
-    lsecSlot.append(entry ? lsecPlayer(entry) : lsecMissing(label));
+    lsecSlot.append(entry ? lsecPlayer(entry, ctx) : lsecMissing(label));
   }
 
   function setupCountables() {

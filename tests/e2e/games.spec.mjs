@@ -4,6 +4,8 @@ const ACTIVITIES = {
   animales: ['reconocer', 'sonidos', 'sombras', 'rasgos', 'memoria'],
   colores: ['colores', 'objetos', 'figuras', 'clasificar', 'secuencias'],
   numeros: ['contar', 'relacionar', 'numeros', 'comparar', 'sumar'],
+  letras: ['vocales', 'inicial', 'sonidos', 'palabras', 'leer'],
+  emociones: ['iguales', 'nombrar', 'situaciones', 'acciones', 'memoria'],
 };
 
 for (const [world, list] of Object.entries(ACTIVITIES)) {
@@ -109,4 +111,19 @@ test('con la voz activada el juego avanza solo, aunque el navegador no avise el 
   await seedState(page, { ...FAST, prefs: { ...FAST.prefs, voice: true, autoSpeak: true } });
   await page.goto('#/juego/numeros/relacionar/1');
   await playToEnd(page);
+});
+
+test('Forma la palabra: una letra equivocada no castiga y se puede escribir con el teclado', async ({ page }) => {
+  await seedState(page, FAST);
+  await page.goto('#/juego/letras/palabras/2');
+  const word = await page.locator('.game').getAttribute('data-answer');
+  const wrong = page.locator(`.tile:not([data-letter="${word[0]}"])`).first();
+  await wrong.click();
+  await expect(page.locator('.feedback')).toContainText('Prueba otra');
+  await expect(page.locator('.slot--filled')).toHaveCount(0);
+  await wrong.click();
+  await expect(page.locator('.tile.is-hint')).toHaveAttribute('data-letter', word[0]);
+  for (const letter of word) await page.keyboard.press(letter);
+  await expect(page.locator('.word-slots')).toHaveClass(/is-complete/);
+  await expect(page.locator('.slot--filled')).toHaveCount(word.length);
 });

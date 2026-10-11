@@ -64,6 +64,13 @@ Las pruebas de `tests/unit/games.test.mjs` recorren automáticamente todas las
 actividades registradas (300 rondas por nivel). Si tu juego tiene reglas propias,
 agrega una prueba específica como las de «¿Dónde hay más?» o «Juntamos».
 
+### Otros tipos de juego
+
+- `kind: 'memory'` con `createBoard({ level, rng })` → `{ pairs, cards: [{ key, label, html }], say, text }`
+  (ver «Memoria de emociones»).
+- `kind: 'spell'` con `createWord({ level, rng, previous })` → `{ key, word, say, text, pictureHtml, tiles: [{ key, letter }] }`
+  (ver «Forma la palabra»).
+
 ## 3. Activar un mundo «próximamente»
 
 1. Crea `js/games/letras.js` con sus actividades y exporta `LETTER_ACTIVITIES`.

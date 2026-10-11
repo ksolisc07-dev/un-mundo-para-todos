@@ -315,7 +315,7 @@ export function teachersScreen(ctx) {
       activitiesSection(ctx),
       difficultySection(ctx),
       progressSection(ctx, renderContent),
-      prefsForm(ctx),
+      prefsForm(ctx, { adult: true }),
       recommendations(),
       el(
         'section',

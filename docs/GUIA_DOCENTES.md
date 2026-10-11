@@ -40,6 +40,43 @@ reales, la conversación ni la mediación de una persona adulta: las potencia.
 | ¿Dónde hay más? | Comparar cantidades (más / menos) | No (hay pictograma) | No |
 | Juntamos | Suma visual | No | No |
 
+### Las letras
+| Actividad | Aprendizaje | ¿Requiere oír? | ¿Requiere leer? |
+| --- | --- | --- | --- |
+| Las vocales | Vocales mayúsculas y minúsculas | No (la vocal se ve) | Es el objetivo |
+| ¿Con qué letra empieza? | Letra inicial de una palabra | Ayuda | Es el objetivo |
+| Empieza igual | Conciencia fonológica (sonido inicial) | **Sí**, es un juego de sonidos | No |
+| Forma la palabra | Construir palabras letra por letra | No (la palabra está escrita) | Es el objetivo |
+| ¿Qué dice? | Primeras lecturas: dibujo y palabra | No | Es el objetivo |
+
+En «Empieza igual» no se usan palabras con c, z, s mezcladas, b/v, h ni ll, porque en
+el español de Ecuador suenan igual o no suenan, y la respuesta sería ambigua.
+
+### Las emociones
+| Actividad | Aprendizaje | ¿Requiere oír? | ¿Requiere leer? |
+| --- | --- | --- | --- |
+| Caras iguales | Reconocer la misma emoción en personas distintas | No | No |
+| ¿Cómo se siente? | Nombrar alegría, tristeza, sorpresa, miedo y enojo | Ayuda (también hay texto) | Ayuda (también hay voz) |
+| ¿Qué siente? | Relacionar situaciones con emociones | Ayuda | Ayuda (hay dibujo de la situación) |
+| ¿Qué puedes hacer? | Empatía y autorregulación: elegir la respuesta amable | Ayuda | Ayuda (cada acción tiene pictograma) |
+| Memoria de emociones | Memoria y reconocimiento de emociones | No | No |
+
+Sugerencia: después de cada partida, conversen. «¿Cuándo te sentiste así?»,
+«¿Qué te ayuda cuando estás enojado?». En las situaciones, nunca se marca como
+incorrecta una emoción que también podría sentirse (por ejemplo, un regalo puede dar
+alegría y sorpresa): por eso sólo se ofrecen opciones claramente distintas.
+
+## Práctica de señas con la cámara
+
+Cuando existan videos LSEC validados, en la sección **Sonido y vista** de este panel
+aparecerá la opción «Permitir practicar señas frente a la cámara». Junto al video, la
+niña o el niño podrá verse como en un espejo para imitar la seña.
+
+- La imagen **no se graba, no se guarda y no se envía**.
+- La plataforma **no califica** la seña: acompañe y retroalimente usted, idealmente con
+  apoyo de una persona competente en LSEC.
+- El navegador pedirá permiso para usar la cámara; puede negarse y el juego sigue igual.
+
 ## Niveles
 
 - **Automática** (recomendada): cada actividad empieza en el nivel 1 y, al completarlo,

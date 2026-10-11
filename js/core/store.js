@@ -20,6 +20,7 @@ export const DEFAULT_PREFS = Object.freeze({
   largeText: false,
   colorLabels: false, // mostrar el nombre escrito de cada color
   lsec: false, // mostrar videos LSEC validados cuando existan
+  lsecCamera: false, // práctica de señas frente a la cámara (lo activa una persona adulta)
 });
 
 export const DEFAULT_TEACHER = Object.freeze({

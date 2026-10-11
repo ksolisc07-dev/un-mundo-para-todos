@@ -6,6 +6,8 @@ import { WORLDS } from '../../js/data/worlds.js';
 import { ANIMALS } from '../../js/data/animals.js';
 import { COLOR_OBJECTS, CONFUSABLE_SHAPES } from '../../js/data/colors.js';
 import { LSEC_ENTRIES } from '../../js/data/lsec.js';
+import { WORDS, SPELL_WORDS, initialOf } from '../../js/data/words.js';
+import { SITUATIONS, SCENARIOS } from '../../js/data/emotions.js';
 
 const ROUNDS = 300;
 const LEVELS = [1, 2, 3];
@@ -38,7 +40,7 @@ test('cada mundo jugable tiene 5 actividades y los demás están marcados como p
       assert.ok(world.planned.length > 0);
     }
   }
-  assert.equal(allActivityKeys().length, 15);
+  assert.equal(allActivityKeys().length, 25);
 });
 
 test('todas las actividades documentan su objetivo y sus 3 niveles', () => {
@@ -63,7 +65,7 @@ for (const [world, activity] of choiceActivities) {
         assert.ok(r.say && r.text && r.successSay && r.promptHtml && r.promptLabel, 'textos completos');
         for (const o of r.options) {
           assert.ok(o.label && o.label.trim(), 'cada opción tiene nombre accesible');
-          assert.match(o.html, /<svg|class="numeral"/);
+          assert.match(o.html, /<svg|class="(numeral|letter|word)"/);
         }
         if (r.lsec) assert.ok(lsecConcepts.has(r.lsec), `concepto LSEC desconocido: ${r.lsec}`);
         if (i > 0) assert.notEqual(r.key, rounds[i - 1].key, 'no repetir la ronda anterior');
@@ -77,7 +79,7 @@ for (const [world, activity] of choiceActivities) {
 
 test('el número de opciones crece con el nivel', () => {
   for (const [, activity] of choiceActivities) {
-    const counts = LEVELS.map((l) => playRounds(activity, l, 5, 1)[0].options.length);
+    const counts = LEVELS.map((l) => Math.max(...playRounds(activity, l, 5, 60).map((r) => r.options.length)));
     assert.ok(counts[0] <= counts[1] && counts[1] <= counts[2], `${activity.id}: ${counts}`);
   }
 });
@@ -211,4 +213,103 @@ test('los textos en español concuerdan en género y número', () => {
   assert.doesNotMatch(text, /\b(la|una) (estrella|fresa|hoja|zanahoria|naranja|berenjena) es (rojo|amarillo|morado|rosado)\b/);
   assert.doesNotMatch(text, /estrella (roja|amarilla)?(rojo|amarillo|morado|rosado)\b/);
   assert.doesNotMatch(text, /corazóns|\bmas\b/);
+});
+
+/* ---------- Letras ---------- */
+
+test('Forma la palabra: las fichas contienen la palabra y las letras extra del nivel', () => {
+  const palabras = getActivity('letras', 'palabras');
+  for (const level of LEVELS) {
+    const rng = createRng(level);
+    let previous;
+    for (let i = 0; i < 200; i += 1) {
+      const w = palabras.createWord({ level, rng, previous });
+      assert.notEqual(w.key, previous);
+      previous = w.key;
+      assert.ok(SPELL_WORDS[level].includes(w.key));
+      assert.match(w.word, /^[a-zñ]+$/, 'sin tildes ni mayúsculas');
+      assert.equal(w.tiles.length, w.word.length + level - 1);
+      const letters = w.tiles.map((t) => t.letter);
+      for (const ch of w.word) {
+        const need = [...w.word].filter((c) => c === ch).length;
+        assert.ok(letters.filter((c) => c === ch).length >= need, `${w.word}: falta ${ch}`);
+      }
+      assert.equal(new Set(w.tiles.map((t) => t.key)).size, w.tiles.length);
+    }
+  }
+});
+
+test('¿Con qué letra empieza?: la respuesta es la inicial (sin tilde)', () => {
+  const inicial = getActivity('letras', 'inicial');
+  assert.equal(initialOf('árbol'), 'a');
+  for (const level of LEVELS) {
+    for (const r of playRounds(inicial, level)) {
+      const w = WORDS.find((x) => x.id === r.key);
+      assert.equal(r.answer, initialOf(w.word));
+      if (level === 1) assert.ok('aeiou'.includes(r.answer));
+    }
+  }
+});
+
+test('Empieza igual: sólo la respuesta comparte el sonido inicial', () => {
+  const sonidos = getActivity('letras', 'sonidos');
+  for (const level of LEVELS) {
+    for (const r of playRounds(sonidos, level)) {
+      const target = WORDS.find((w) => w.id === r.key);
+      for (const o of r.options) {
+        const w = WORDS.find((x) => x.id === o.key);
+        assert.ok(w.sound, `${w.id} no debe usarse (sonido ambiguo)`);
+        assert.notEqual(o.key, target.id);
+        assert.equal(w.sound === target.sound, o.key === r.answer, `${target.id} / ${w.id}`);
+      }
+    }
+  }
+});
+
+test('¿Qué dice?: en el nivel 1 todas las palabras empiezan distinto', () => {
+  const leer = getActivity('letras', 'leer');
+  for (const r of playRounds(leer, 1)) {
+    const initials = r.options.map((o) => initialOf(WORDS.find((w) => w.id === o.key).word));
+    assert.equal(new Set(initials).size, initials.length);
+  }
+});
+
+/* ---------- Emociones ---------- */
+
+test('¿Qué siente?: nunca ofrece como distractora una emoción también razonable', () => {
+  const situaciones = getActivity('emociones', 'situaciones');
+  for (const level of LEVELS) {
+    for (const r of playRounds(situaciones, level)) {
+      const s = SITUATIONS.find((x) => x.id === r.key);
+      assert.equal(r.answer, s.emotion);
+      for (const o of r.options) if (o.key !== r.answer) assert.ok(!s.plausible.includes(o.key), `${s.id}: ${o.key}`);
+    }
+  }
+});
+
+test('¿Qué puedes hacer?: la única respuesta es la acción amable', () => {
+  const acciones = getActivity('emociones', 'acciones');
+  for (const level of LEVELS) {
+    for (const r of playRounds(acciones, level)) {
+      const s = SCENARIOS.find((x) => x.id === r.key);
+      assert.equal(r.answer, s.good);
+      assert.equal(r.options.length, level + 1);
+      for (const o of r.options) if (o.key !== s.good) assert.ok(s.bad.includes(o.key));
+    }
+  }
+});
+
+test('Memoria de emociones: parejas de la misma emoción', () => {
+  const memoria = getActivity('emociones', 'memoria');
+  for (const level of LEVELS) {
+    for (let seed = 1; seed < 30; seed += 1) {
+      const board = memoria.createBoard({ level, rng: createRng(seed) });
+      const counts = {};
+      board.cards.forEach((c) => {
+        counts[c.key] = (counts[c.key] || 0) + 1;
+      });
+      assert.equal(Object.keys(counts).length, board.pairs);
+      assert.ok(Object.values(counts).every((n) => n === 2));
+    }
+  }
 });

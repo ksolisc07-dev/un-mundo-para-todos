@@ -83,6 +83,17 @@ function comingSoon(ctx, world) {
             `Videos validados: ${ctx.lsec.publishableCount()} de ${ctx.lsec.entries.length}. `,
             'Mientras no existan videos auténticos y validados, esta sección no muestra señas.'
           ),
+          el('h3', {}, '¿Responder con señas usando la cámara?'),
+          el(
+            'p',
+            {},
+            'Ya está programada una práctica frente a la cámara, como un espejo: la niña o el niño ve el video LSEC validado y se ve a sí mismo para imitar la seña. La imagen no se graba ni se envía. Se activa cuando existan videos validados y una persona adulta la permita.'
+          ),
+          el(
+            'p',
+            {},
+            'La plataforma todavía no califica señas automáticamente: para hacerlo bien se necesita un modelo entrenado con muchas grabaciones auténticas de LSEC, con consentimiento y validadas por la comunidad sorda. Calificar sin eso daría por buenas señas incorrectas.'
+          ),
           ...LSEC_CATEGORIES.map((cat) => {
             const items = ctx.lsec.entries.filter((e) => e.category === cat.id);
             return el(

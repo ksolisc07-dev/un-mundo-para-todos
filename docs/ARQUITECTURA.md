@@ -47,7 +47,7 @@ Cada archivo exporta actividades. Una actividad de elección tiene esta forma:
   title: '¿Quién es?',
   goal: 'Reconocer animales por su nombre.',        // para docentes
   levels: { 1: '…', 2: '…', 3: '…' },               // qué cambia en cada nivel
-  kind: 'choice',                                    // o 'memory'
+  kind: 'choice',                                    // o 'memory' o 'spell'
   icon: () => '<svg…>',
   createRound({ level, rng, previous }) { return ronda; },
 }
@@ -60,6 +60,9 @@ El contrato completo de una **ronda** está documentado al inicio de
 - `choiceGame.js`: motor de juegos de elección (instrucción, opciones, ayuda,
   retroalimentación, conteo táctil, panel LSEC).
 - `memoryGame.js`: juego de parejas.
+- `spellGame.js`: «Forma la palabra» (actividades `kind: 'spell'` con `createWord()`).
+- `cameraPractice.js`: práctica de señas frente a la cámara (espejo local, sin
+  grabar ni enviar, sin calificación automática).
 - `lsecPlayer.js`: reproductor de videos LSEC validados.
 - `prefsForm.js`: formulario de preferencias (usado en dos pantallas).
 - `ui.js`: barra superior, botones con ícono, estrellas, botón de silencio.
@@ -99,7 +102,7 @@ No hay identificadores de personas. El progreso es del dispositivo, no de un ni�
 - `tests/unit/` (Node, `node:test`): núcleo, generadores de rondas (300 rondas por
   actividad y nivel), registro LSEC, lista del service worker, rutas relativas,
   importaciones y ausencia de rastreadores.
-- `tests/e2e/` (Playwright, escritorio y móvil): juego completo de las 15 actividades,
+- `tests/e2e/` (Playwright, escritorio y móvil): juego completo de las 25 actividades,
   errores y ayuda, memoria, conteo, preferencias, docentes, teclado, tamaños táctiles,
   desbordes, PWA sin conexión y auditoría axe.
 - `tests/server.mjs` sirve el sitio bajo `/un-mundo-para-todos/` como GitHub Pages

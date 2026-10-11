@@ -2,11 +2,15 @@
 import { ANIMAL_ACTIVITIES } from './animals.js';
 import { COLOR_ACTIVITIES } from './colors.js';
 import { NUMBER_ACTIVITIES } from './numbers.js';
+import { LETTER_ACTIVITIES } from './letters.js';
+import { EMOTION_ACTIVITIES } from './emotions.js';
 
 export const ACTIVITIES_BY_WORLD = {
   animales: ANIMAL_ACTIVITIES,
   colores: COLOR_ACTIVITIES,
   numeros: NUMBER_ACTIVITIES,
+  letras: LETTER_ACTIVITIES,
+  emociones: EMOTION_ACTIVITIES,
 };
 
 export function activitiesFor(worldId) {

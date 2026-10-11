@@ -6,7 +6,7 @@
  * Al publicar cambios, incrementa CACHE_VERSION. Si agregas archivos, súmalos
  * a ASSETS (una prueba automatizada verifica que la lista esté completa).
  */
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const CACHE_NAME = `un-mundo-para-todos-${CACHE_VERSION}`;
 
 const ASSETS = [
@@ -18,6 +18,14 @@ const ASSETS = [
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './js/app.js',
+  './js/components/cameraPractice.js',
+  './js/components/spellGame.js',
+  './js/games/emotions.js',
+  './js/games/letters.js',
+  './js/data/emotions.js',
+  './js/data/words.js',
+  './js/art/emotions.js',
+  './js/art/words.js',
   './js/art/animals.js',
   './js/art/icons.js',
   './js/art/mascot.js',

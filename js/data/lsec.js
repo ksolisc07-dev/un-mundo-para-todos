@@ -24,6 +24,7 @@ export const LSEC_CATEGORIES = [
   { id: 'colores', name: 'Colores' },
   { id: 'numeros', name: 'Números' },
   { id: 'emociones', name: 'Emociones' },
+  { id: 'alfabeto', name: 'Alfabeto manual (dactilología)' },
 ];
 
 const pending = (concept, category, label) => ({
@@ -84,6 +85,8 @@ export const LSEC_ENTRIES = [
   pending('emocion:tristeza', 'emociones', 'Tristeza'),
   pending('emocion:miedo', 'emociones', 'Miedo'),
   pending('emocion:sorpresa', 'emociones', 'Sorpresa'),
+  pending('emocion:enojo', 'emociones', 'Enojo'),
+  ...'abcdefghijklmnñopqrstuvwxyz'.split('').map((l) => pending(`letra:${l}`, 'alfabeto', `Letra ${l.toUpperCase()}`)),
 ];
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;

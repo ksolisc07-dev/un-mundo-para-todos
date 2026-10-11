@@ -11,6 +11,8 @@ export default defineConfig({
     baseURL: `http://localhost:${PORT}/un-mundo-para-todos/`,
     locale: 'es-EC',
     trace: 'retain-on-failure',
+    // Cámara simulada para probar la práctica de señas sin hardware real.
+    launchOptions: { args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] },
   },
   webServer: {
     command: `node tests/server.mjs`,
@@ -19,7 +21,7 @@ export default defineConfig({
     env: { PORT: String(PORT) },
   },
   projects: [
-    { name: 'escritorio', use: { ...devices['Desktop Chrome'] } },
-    { name: 'movil', use: { ...devices['Pixel 5'] } },
+    { name: 'escritorio', use: { ...devices['Desktop Chrome'], launchOptions: { args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] } } },
+    { name: 'movil', use: { ...devices['Pixel 5'], launchOptions: { args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] } } },
   ],
 });

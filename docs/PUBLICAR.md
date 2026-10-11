@@ -35,7 +35,7 @@ algo se rompió.
 ## Comprobar después de publicar
 
 - La página carga sin errores en la consola del navegador (F12).
-- Se pueden abrir los tres mundos jugables y terminar una actividad.
+- Se pueden abrir los cinco mundos jugables y terminar una actividad.
 - Al recargar una pantalla interna (por ejemplo `#/mundo/animales`) se mantiene.
 - En el teléfono, el navegador ofrece «Agregar a la pantalla principal».
 

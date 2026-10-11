@@ -8,6 +8,7 @@ import { icon } from '../art/icons.js';
 import { topBar, starRow } from '../components/ui.js';
 import { choiceGame } from '../components/choiceGame.js';
 import { memoryGame } from '../components/memoryGame.js';
+import { spellGame } from '../components/spellGame.js';
 import { celebrate } from '../components/celebrate.js';
 import { notFoundScreen } from './notFound.js';
 
@@ -101,10 +102,8 @@ export function playScreen(ctx, params) {
     ctx.announce(message);
   }
 
-  const game =
-    activity.kind === 'memory'
-      ? memoryGame(ctx, activity, { level, onProgress: renderProgress, onFinish: finish })
-      : choiceGame(ctx, activity, { level, rounds, onProgress: renderProgress, onFinish: finish });
+  const engines = { memory: memoryGame, spell: spellGame, choice: choiceGame };
+  const game = engines[activity.kind](ctx, activity, { level, rounds, onProgress: renderProgress, onFinish: finish });
   container.append(game.el);
   ctx.onCleanup(() => game.destroy());
 

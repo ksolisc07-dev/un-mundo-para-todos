@@ -91,9 +91,48 @@ retribución.
   siguiendo [NUEVOS_JUEGOS.md](NUEVOS_JUEGOS.md), usando sólo conceptos con video
   validado (`lsecRegistry.videoFor(concepto)`).
 
+## Práctica frente a la cámara (ya programada)
+
+Si una persona adulta lo permite en «Docentes y familias → Sonido y vista», junto a
+cada video LSEC validado aparece el botón **Practicar con mi cámara**:
+
+- Muestra la imagen de la cámara frontal como un espejo, al lado del video de referencia.
+- La imagen se procesa sólo en el navegador: **no se graba, no se guarda y no se envía**.
+- Se apaga con un botón y al salir de la pantalla.
+- **No califica** la seña. El juego se sigue respondiendo tocando la imagen correcta;
+  la cámara sirve para imitar y practicar con acompañamiento.
+
+Código: `js/components/cameraPractice.js`. Pruebas: `tests/e2e/lsec-camera.spec.mjs`
+(usa una cámara simulada y videos de prueba que sólo existen durante la prueba).
+
+## Reconocimiento automático de señas
+
+Que la niña o el niño **responda con señas y el sistema las reconozca** es posible
+técnicamente (por ejemplo, detectando puntos de manos, brazos y rostro en el navegador
+y comparándolos con un modelo), pero **no está implementado** porque hoy faltan las
+condiciones para hacerlo bien:
+
+1. **Datos auténticos**: muchas grabaciones de cada seña, hechas por distintas personas
+   sordas señantes (edades, manos dominantes, tonos de piel, iluminación), con
+   consentimiento informado. En el caso de niñas y niños, con autorización de sus familias.
+2. **Validación**: personas competentes en LSEC y de la comunidad sorda revisan las
+   etiquetas y deciden qué variantes regionales son correctas.
+3. **Modelo evaluado**: entrenarlo y medir sus errores con grabaciones que no usó al
+   aprender. La LSEC usa movimiento, orientación, configuración de la mano y expresión
+   facial; un modelo que sólo mira la forma de la mano confundiría señas.
+4. **Privacidad**: el reconocimiento debe ejecutarse en el dispositivo, sin enviar video,
+   y con modelos que puedan descargarse y usarse sin conexión.
+5. **Sin penalizar**: si el modelo duda, debe decir «no estoy seguro» y nunca marcar
+   como incorrecta una seña que podría estar bien.
+
+Sin esos pasos, un reconocedor diría a un niño sordo que su seña está mal cuando está
+bien (o al revés), lo que contradice los principios de este proyecto. Cuando exista un
+conjunto de datos validado, la práctica con cámara es el punto donde se conectaría.
+
 ## Vocabulario previsto
 
 Saludos (hola, adiós, buenos días, gracias, por favor), vocabulario básico (mamá, papá,
 escuela, agua, comer, jugar), los 13 animales del Mundo 1, 8 colores, números del 1
-al 10 y emociones (alegría, tristeza, miedo, sorpresa). La lista completa y su estado
+al 10, emociones (alegría, tristeza, miedo, sorpresa, enojo) y el alfabeto manual
+(dactilología), que usan los juegos de letras. La lista completa y su estado
 están en `js/data/lsec.js` y en la pantalla del mundo «Manitos que hablan».
